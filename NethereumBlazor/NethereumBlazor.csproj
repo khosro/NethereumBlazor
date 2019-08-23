@@ -12,12 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Blazor.FlexGrid" Version="0.8.2" />
-    <PackageReference Include="DynamicData" Version="6.7.1.2534" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview5-19227-01" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview5-19227-01" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.DevServer" Version="3.0.0-preview5-19227-01" PrivateAssets="all" />
-    <PackageReference Include="Nethereum.Web3" Version="3.3.0" />
+    <PackageReference Include="Blazor.FlexGrid" Version="0.8.7" />
+    <PackageReference Include="DynamicData" Version="6.13.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview8.19405.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview8.19405.7" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.DevServer" Version="3.0.0-preview8.19405.7" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.0.0-preview8.19405.7" />
+    <PackageReference Include="Nethereum.Web3" Version="3.4.0" />
   </ItemGroup>
 
 
