@@ -24,20 +24,25 @@
     }
 </div>
 
-    @functions {
+@functions {
 
-        protected override void OnInitialized()
+    protected override void OnInitialized()
+    {
+        //refreshing the seconds countdown
+        System.Reactive.Linq.Observable.Timer(TimeSpan.FromMilliseconds(500), TimeSpan.FromMilliseconds(2000), RxApp.MainThreadScheduler)
+            .Subscribe(_ =>
+           {
+               if (ToastsViewModel.Toasts.Count > 0)
+               {
+                   base.InvokeAsync(StateHasChanged);
+               }
+           });
+
+        ToastsViewModel.Toasts.Connect().Subscribe(_ =>
         {
-            //refreshing the seconds countdown
-            System.Reactive.Linq.Observable.Timer(TimeSpan.FromMilliseconds(500), TimeSpan.FromMilliseconds(2000), RxApp.MainThreadScheduler)
-                .Subscribe( _ =>
-                {
-                    if (ToastsViewModel.Toasts.Count > 0)
-                    {
-                        StateHasChanged();
-                    }
-                });
+            //StateHasChanged();
+            base.InvokeAsync(StateHasChanged);
 
-            ToastsViewModel.Toasts.Connect().Subscribe(_ => StateHasChanged());
-        }
+        });
     }
+}

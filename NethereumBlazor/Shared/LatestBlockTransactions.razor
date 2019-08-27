@@ -43,17 +43,27 @@
 
 @functions {
 
-protected override void OnInitialized()
-{
+    protected override void OnInitialized()
+    {
 
-    LatestBlockTransactionsViewModel.Transactions.Connect().Subscribe(_ => StateHasChanged());
+        LatestBlockTransactionsViewModel.Transactions.Connect().Subscribe(_ =>
+        {
+            //StateHasChanged();
+            base.InvokeAsync(StateHasChanged);
 
-    LatestBlockTransactionsViewModel.WhenAnyValue(x => x.Loading).Subscribe(_ => StateHasChanged());
-}
+        });
 
-public static string TruncateEllipse(string value, int maxChars)
-{
-    return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
-}
+        LatestBlockTransactionsViewModel.WhenAnyValue(x => x.Loading).Subscribe(_ =>
+        {
+            //StateHasChanged();
+            base.InvokeAsync(StateHasChanged);
+
+        });
+    }
+
+    public static string TruncateEllipse(string value, int maxChars)
+    {
+        return value.Length <= maxChars ? value : value.Substring(0, maxChars) + "...";
+    }
 
 }

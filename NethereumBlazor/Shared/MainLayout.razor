@@ -63,7 +63,12 @@
     protected override void OnInitialized()
     {
         Web3UrlViewModel.Url = "https://mainnet.infura.io/v3/7238211010344719ad14a89db874158c";
-        NewBlockProcessingService.WhenAnyValue(x => x.Loading).Subscribe(_ => StateHasChanged());
+        NewBlockProcessingService.WhenAnyValue(x => x.Loading).Subscribe(_ =>
+        {
+            //StateHasChanged();
+            base.InvokeAsync(StateHasChanged);
+
+        });
     }
 
 

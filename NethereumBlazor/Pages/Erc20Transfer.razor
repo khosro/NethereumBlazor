@@ -123,18 +123,22 @@
 
     protected override void OnInitialized()
     {
-        SendTransactionViewModel.Accounts.Connect().Subscribe(_ => StateHasChanged());
+        SendTransactionViewModel.Accounts.Connect().Subscribe(_ => {
+                    //StateHasChanged();
+                    base.InvokeAsync(StateHasChanged);
+
+                });
 
         SendTransactionViewModel.WhenAnyValue(x => x.Account).Subscribe(_ => Console.WriteLine(SendTransactionViewModel.Account));
 
         SendTransactionViewModel.WhenAnyValue(x => x.EtherBalance).Subscribe(_ =>
         {
-            StateHasChanged();
+                base.InvokeAsync(StateHasChanged);
         });
 
         SendTransactionViewModel.WhenAnyValue(x => x.TokenBalance).Subscribe(_ =>
         {
-            StateHasChanged();
+                base.InvokeAsync(StateHasChanged);
         });
     }
 

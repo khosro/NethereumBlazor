@@ -89,11 +89,12 @@ Collection.AddColumnValueRenderFunction(txn => txn.TransactionHash, transactionH
         BlockTransactionsViewModel.BlockNumber = BigInteger.Parse(BlockNumber);
         BlockTransactionsViewModel.Transactions.Connect()
             .Subscribe(_ =>
-                {
-                    TransactionCount = BlockTransactionsViewModel.Transactions.Count;
-                    dataAdapter = new CollectionTableDataAdapter<TransactionViewModel>(BlockTransactionsViewModel.Transactions.Items.ToArray());
+            {
+                TransactionCount = BlockTransactionsViewModel.Transactions.Count;
+                dataAdapter = new CollectionTableDataAdapter<TransactionViewModel>(BlockTransactionsViewModel.Transactions.Items.ToArray());
 
-                    StateHasChanged();
-                });
+                // StateHasChanged();
+                base.InvokeAsync(StateHasChanged);
+            });
     }
 }

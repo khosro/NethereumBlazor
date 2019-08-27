@@ -83,7 +83,11 @@
     protected override void OnInitialized()
     {
 
-        AccountsViewModel.Accounts.Connect().Subscribe(_ => StateHasChanged());
+        AccountsViewModel.Accounts.Connect().Subscribe(_ => {
+                    //StateHasChanged();
+                    base.InvokeAsync(StateHasChanged);
+
+                });
 
     }
 }

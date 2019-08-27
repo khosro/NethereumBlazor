@@ -104,7 +104,7 @@
 
         SendTransactionViewModel.WhenAnyValue(x => x.EtherBalance).Subscribe(_ =>
         {
-            StateHasChanged();
+                base.InvokeAsync(StateHasChanged);
         });
     }
 }
