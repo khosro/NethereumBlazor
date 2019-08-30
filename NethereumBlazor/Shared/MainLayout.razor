@@ -23,11 +23,10 @@
 
         <div class="form-inline">
             <select class="form-control mr-sm-2" @onchange="UrlChange">
-                <option value="https://mainnet.infura.io/v3/7238211010344719ad14a89db874158c" selected>https://mainnet.infura.io</option>
-                <option value="https://kovan.infura.io/v3/7238211010344719ad14a89db874158c">https://kovan.infura.io</option>
-                <option value="https://ropsten.infura.io/v3/7238211010344719ad14a89db874158c">https://ropsten.infura.io</option>
-                <option value="https://rinkeby.infura.io/v3/7238211010344719ad14a89db874158c">https://rinkeby.infura.io</option>
-                <option value="http://127.0.0.1:8545">http://127.0.0.1:8545</option>
+                @foreach (var url in Urls)
+                {
+                    <option value=@url.Key>@url.Value</option>
+                }
             </select>
             <input type="text" class="form-control mr-sm-2" @bind="Web3UrlViewModel.Url" placeholder="Chain Url" />
 
@@ -57,18 +56,21 @@
 
 @functions
 {
+    Dictionary<string, string> Urls = new Dictionary<string, string>(){
+        {"https://mainnet.infura.io/v3/7238211010344719ad14a89db874158c","https://mainnet.infura.io" }
+        , {"https://kovan.infura.io/v3/7238211010344719ad14a89db874158c","https://kovan.infura.io" }
+        , {"https://ropsten.infura.io/v3/7238211010344719ad14a89db874158c","https://ropsten.infura.io" }
+        , {"https://rinkeby.infura.io/v3/7238211010344719ad14a89db874158c","https://rinkeby.infura.io" }
+        ,  {"http://127.0.0.1:8545","http://127.0.0.1:8545" }
+    };
+
     public string Query { get; set; }
     public bool QueryError { get; set; } = false;
 
     protected override void OnInitialized()
     {
-        Web3UrlViewModel.Url = "https://mainnet.infura.io/v3/7238211010344719ad14a89db874158c";
-        NewBlockProcessingService.WhenAnyValue(x => x.Loading).Subscribe(_ =>
-        {
-            //StateHasChanged();
-            base.InvokeAsync(StateHasChanged);
-
-        });
+        Web3UrlViewModel.Url = Urls.FirstOrDefault().Key;
+        NewBlockProcessingService.WhenAnyValue(x => x.Loading).Subscribe(_ => { base.InvokeAsync(StateHasChanged); });
     }
 
 
