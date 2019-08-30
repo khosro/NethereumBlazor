@@ -74,6 +74,10 @@
 
     public void SearchBlockchain()
     {
+        if (string.IsNullOrWhiteSpace(Query))
+        {
+            return;
+        }
         Query = Query.Trim();
         var searchType = SearchQueryParser.InferSearchType(Query);
 
