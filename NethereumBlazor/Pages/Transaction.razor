@@ -91,18 +91,18 @@
 
 @functions {
 
-//workaround search for the time being
-[Parameter]
-string BlockNumber { get; set; }
+    //workaround search for the time being
+    [Parameter]
+    public string BlockNumber { get; set; }
 
-[Parameter]
-string TransactionHash { get; set; }
+    [Parameter]
+    public string TransactionHash { get; set; }
 
 
 
-protected override async Task OnParametersSetAsync()
-{
-    await TransactionWithReceiptViewModel.LoadTransactionAsync(TransactionHash);
-    TransactionWithReceiptViewModel.WhenAnyValue(x => x.Loading).Subscribe((x) => StateHasChanged());
-}
+    protected override async Task OnParametersSetAsync()
+    {
+        await TransactionWithReceiptViewModel.LoadTransactionAsync(TransactionHash);
+        TransactionWithReceiptViewModel.WhenAnyValue(x => x.Loading).Subscribe((x) => StateHasChanged());
+    }
 }

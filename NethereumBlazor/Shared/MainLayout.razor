@@ -4,10 +4,11 @@
 @using NethereumBlazor.Services
 @using NethereumBlazor.ViewModels
 @using ReactiveUI
+@using Microsoft.AspNetCore.Components.Web
 @inherits LayoutComponentBase
 @inject NewBlockProcessingService NewBlockProcessingService
 @inject Web3UrlViewModel Web3UrlViewModel
-@inject IUriHelper UriHelper
+@inject NavigationManager NavigationManager
 
 <div class="sidebar">
     <NavMenu />
@@ -88,13 +89,13 @@
             case SearchType.Block:
                 {
 
-                    UriHelper.NavigateTo("block/" + Query);
+                    NavigationManager.NavigateTo("block/" + Query);
                     QueryError = false;
                     break;
                 }
             case SearchType.Transaction:
                 {
-                    UriHelper.NavigateTo("/transaction/" + Query);
+                    NavigationManager.NavigateTo("/transaction/" + Query);
                     QueryError = false;
                     break;
                 }
@@ -105,7 +106,7 @@
 
     }
 
-    protected void UrlChange(UIChangeEventArgs urlChangeEventArgs)
+    protected void UrlChange(ChangeEventArgs urlChangeEventArgs)
     {
         Web3UrlViewModel.Url = (string)urlChangeEventArgs.Value;
     }
