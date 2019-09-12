@@ -7,8 +7,8 @@
 @inherits LayoutComponentBase
 @inject NewBlockProcessingService NewBlockProcessingService
 @inject Web3UrlViewModel Web3UrlViewModel
-@inject IUriHelper UriHelper
-
+@inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.Components.Web
 <div class="sidebar">
     <NavMenu />
 </div>
@@ -57,11 +57,12 @@
 @functions
 {
     Dictionary<string, string> Urls = new Dictionary<string, string>(){
-        {"https://mainnet.infura.io/v3/7238211010344719ad14a89db874158c","https://mainnet.infura.io" }
+          {"https://mainnet.infura.io/v3/7238211010344719ad14a89db874158c","https://mainnet.infura.io" }
         , {"https://kovan.infura.io/v3/7238211010344719ad14a89db874158c","https://kovan.infura.io" }
         , {"https://ropsten.infura.io/v3/7238211010344719ad14a89db874158c","https://ropsten.infura.io" }
         , {"https://rinkeby.infura.io/v3/7238211010344719ad14a89db874158c","https://rinkeby.infura.io" }
-        ,  {"http://127.0.0.1:8545","http://127.0.0.1:8545" }
+        , {"http://127.0.0.1:8545","http://127.0.0.1:8545" }
+
     };
 
     public string Query { get; set; }
@@ -88,13 +89,13 @@
             case SearchType.Block:
                 {
 
-                    UriHelper.NavigateTo("block/" + Query);
+                    NavigationManager.NavigateTo("block/" + Query);
                     QueryError = false;
                     break;
                 }
             case SearchType.Transaction:
                 {
-                    UriHelper.NavigateTo("/transaction/" + Query);
+                    NavigationManager.NavigateTo("/transaction/" + Query);
                     QueryError = false;
                     break;
                 }
@@ -105,7 +106,7 @@
 
     }
 
-    protected void UrlChange(UIChangeEventArgs urlChangeEventArgs)
+    protected void UrlChange(ChangeEventArgs urlChangeEventArgs)
     {
         Web3UrlViewModel.Url = (string)urlChangeEventArgs.Value;
     }

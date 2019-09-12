@@ -1,5 +1,6 @@
 ﻿@using NethereumBlazor.ViewModels
 @using ReactiveUI;
+@using Microsoft.AspNetCore.Components.Web
 @inject ToastsViewModel ToastsViewModel
 
 
@@ -40,8 +41,8 @@
 
         ToastsViewModel.Toasts.Connect().Subscribe(_ =>
         {
-            //StateHasChanged();
-            base.InvokeAsync(StateHasChanged);
+        //StateHasChanged();
+        base.InvokeAsync(StateHasChanged);
 
         });
     }
